@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>618</width>
+    <height>486</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tabNext">
+       <attribute name="title">
+        <string>Commandes</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QTableView" name="listCmds"/>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLineEdit" name="leCmd"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bCmdAdd">
+            <property name="text">
+             <string>Ajouter à la fin</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bCmdInsert">
+            <property name="text">
+             <string>Insérer après</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bCmdDel">
+            <property name="text">
+             <string>Supprimer</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabCurrent">
+       <attribute name="title">
+        <string>Commande en cours</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QCheckBox" name="cbExecuteInTerminal">
+          <property name="text">
+           <string>Exécuter les commandes dans un nouveau terminal</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="gbOutput">
+          <property name="title">
+           <string>Sortie en direct</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QTextEdit" name="teOutput"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QPushButton" name="bStopAndNext">
+        <property name="text">
+         <string>Arêter et passer à la commande suivante</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="bStopAndPause">
+        <property name="text">
+         <string>Arêter et mettre en pause</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="bNext">
+        <property name="text">
+         <string>Exécuter la commande suivante</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>618</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_x_cution">
+    <property name="title">
+     <string>Exécution</string>
+    </property>
+    <addaction name="actionArr_ter_tout"/>
+    <addaction name="actionMettre_ne_pause_apr_s_celle_en_cours"/>
+    <addaction name="actionArr_ter_celle_en_cours_et_continuer"/>
+    <addaction name="action_x_cuter_les_commandes_suivantes"/>
+   </widget>
+   <addaction name="menu_x_cution"/>
+  </widget>
+  <action name="actionArr_ter_tout">
+   <property name="text">
+    <string>Arrêter tout</string>
+   </property>
+  </action>
+  <action name="actionMettre_ne_pause_apr_s_celle_en_cours">
+   <property name="text">
+    <string>Arrêter après la commande en cours</string>
+   </property>
+  </action>
+  <action name="actionArr_ter_celle_en_cours_et_continuer">
+   <property name="text">
+    <string>Arrêter la commande en cours et continuer</string>
+   </property>
+  </action>
+  <action name="action_x_cuter_les_commandes_suivantes">
+   <property name="text">
+    <string>Exécuter les commandes suivantes</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
