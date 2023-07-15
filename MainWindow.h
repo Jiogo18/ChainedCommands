@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QStandardItemModel>
 #include "CommandListModel.h"
+#include "ChainedExecutor.h"
 #include <QtMath>
 #include <QKeyEvent>
 
@@ -33,6 +34,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     CommandListModel commands;
+    ChainedExecutor chainedExecutor;
 };
 
 #endif // MAINWINDOW_H

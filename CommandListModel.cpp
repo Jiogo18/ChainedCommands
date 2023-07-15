@@ -5,18 +5,27 @@ CommandListModel::CommandListModel(QObject *parent)
 {
 }
 
-void CommandListModel::addCommand(Command command)
+CommandListModel::~CommandListModel()
+{
+    for(Command *command : commands) {
+        delete command;
+    }
+}
+
+void CommandListModel::addCommand(Command *command)
 {
     beginInsertRows(QModelIndex(), commands.size() - 1, commands.size() - 1);
     commands.append(command);
     endInsertRows();
+    connect(commands.last(), &Command::changed, this, &CommandListModel::onCommandChanged);
 }
 
-void CommandListModel::insertCommand(Command command, int index)
+void CommandListModel::insertCommand(Command *command, int index)
 {
     beginInsertRows(QModelIndex(), index, index);
     commands.insert(index, command);
     endInsertRows();
+    connect(commands.last(), &Command::changed, this, &CommandListModel::onCommandChanged);
 }
 
 void CommandListModel::deleteCommand(int index)
@@ -48,7 +57,7 @@ void CommandListModel::deleteCommands(const QItemSelectionModel *select)
     }
 
     std::sort(commandsIndex.begin(), commandsIndex.end());
-    for(int to = selection.size() - 1; to >= 0; to--) {
+    for(int to = commandsIndex.size() - 1; to >= 0; to--) {
         // Remove a block of elements at [fromIndex;toIndex]
         int toIndex = commandsIndex.at(to);
 
@@ -66,22 +75,32 @@ void CommandListModel::deleteCommands(const QItemSelectionModel *select)
     }
 }
 
+Command *CommandListModel::getCommand(int index)
+{
+    if(index >= commands.size()) return nullptr;
+    return commands[index];
+}
+
+const Command *CommandListModel::getCommandConst(int index) const
+{
+    if(index >= commands.size()) return nullptr;
+    return commands.at(index);
+}
+
 Command *CommandListModel::getCommand(const QModelIndex &index)
 {
-    if(index.row() >= commands.size()) return nullptr;
-    return &commands[index.row()];
+    return getCommand(index.row());
 }
 
 const Command *CommandListModel::getCommandConst(const QModelIndex &index) const
 {
-    if(index.row() >= commands.size()) return nullptr;
-    return &commands.at(index.row());
+    return getCommandConst(index.row());
 }
 
 int CommandListModel::getNextExecutingCommandIndex() const
 {
     for(int i = 0; i < commands.size(); i++) {
-        if(commands.at(i).isWaiting()) return i;
+        if(commands.at(i)->isWaiting()) return i;
     }
     return commands.size();
 }
@@ -122,6 +141,30 @@ QVariant CommandListModel::data(const QModelIndex &index, int role) const
     case Qt::TextAlignmentRole:
         if (col == 0 || col == 1)
             return int(Qt::AlignHCenter | Qt::AlignVCenter);
+        break;
+    case Qt::ToolTipRole:
+        if(col == 1) {
+            if(cmd->isWaiting()) return "Not executed yet";
+            QDateTime start = cmd->getStartTime();
+            QDateTime end = cmd->getEndTime();
+            qint64 ms = start.msecsTo(end);
+            int seconds = ms / 1000;
+            ms %= 1000;
+            QString duration = QString::number(seconds) + "." + QString::number(ms).rightJustified(3, '0');
+            QString msg;
+            if(cmd->isExecuting())
+                msg = "Running for ";
+            else
+                msg = "Executed in ";
+             msg += duration + " second";
+            if(seconds > 1) msg += "s";
+            return msg;
+        }
+        else if(col == 0) {
+            if(cmd->isExecuted()) {
+                return "Execution finished with code " + QString::number(cmd->getExitCode());
+            }
+        }
         break;
     }
 
@@ -167,10 +210,18 @@ Qt::ItemFlags CommandListModel::flags(const QModelIndex &index) const
     if(cmd == nullptr) return Qt::NoItemFlags;
 
     Qt::ItemFlags defFlags = QAbstractTableModel::flags(index);
+    if(!cmd->isWaiting()) return defFlags;
+
     if(index.column() == 2) {
         return Qt::ItemIsEditable | defFlags;
     }
     else {
         return defFlags;
     }
+}
+
+void CommandListModel::onCommandChanged()
+{
+    beginResetModel();
+    endResetModel();
 }

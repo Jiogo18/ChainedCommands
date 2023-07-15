@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>618</width>
-    <height>486</height>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -64,23 +64,34 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QCheckBox" name="cbExecuteInTerminal">
+         <widget class="QCheckBox" name="cbOutputInFile">
           <property name="text">
-           <string>Exécuter les commandes dans un nouveau terminal</string>
+           <string>Enregistrer la sortie dans un fichier</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="gbOutput">
-          <property name="title">
-           <string>Sortie en direct</string>
+         <widget class="QCheckBox" name="cbExecuteInTerminal">
+          <property name="text">
+           <string>Exécuter les commandes dans un nouveau terminal</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <item>
-            <widget class="QTextEdit" name="teOutput"/>
-           </item>
-          </layout>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -89,23 +100,30 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QPushButton" name="bStopAndNext">
+       <widget class="QPushButton" name="bStop">
         <property name="text">
-         <string>Arêter et passer à la commande suivante</string>
+         <string>Arêter tout</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="bStopAndPause">
+       <widget class="QPushButton" name="bStopAfterCurrent">
         <property name="text">
-         <string>Arêter et mettre en pause</string>
+         <string>Arrêter après la commande en cours</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="bNext">
+       <widget class="QPushButton" name="bStopCurrentAndContinue">
         <property name="text">
-         <string>Exécuter la commande suivante</string>
+         <string>Arrêter la commande en cours et continuer</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="bExecuteNext">
+        <property name="text">
+         <string>Exécuter la suite</string>
         </property>
        </widget>
       </item>
@@ -127,31 +145,31 @@
     <property name="title">
      <string>Exécution</string>
     </property>
-    <addaction name="actionArr_ter_tout"/>
-    <addaction name="actionMettre_ne_pause_apr_s_celle_en_cours"/>
-    <addaction name="actionArr_ter_celle_en_cours_et_continuer"/>
-    <addaction name="action_x_cuter_les_commandes_suivantes"/>
+    <addaction name="actionStop"/>
+    <addaction name="actionStopAfterCurrent"/>
+    <addaction name="actionStopCurrentAndContinue"/>
+    <addaction name="actionExecuteNext"/>
    </widget>
    <addaction name="menu_x_cution"/>
   </widget>
-  <action name="actionArr_ter_tout">
+  <action name="actionStop">
    <property name="text">
     <string>Arrêter tout</string>
    </property>
   </action>
-  <action name="actionMettre_ne_pause_apr_s_celle_en_cours">
+  <action name="actionStopAfterCurrent">
    <property name="text">
     <string>Arrêter après la commande en cours</string>
    </property>
   </action>
-  <action name="actionArr_ter_celle_en_cours_et_continuer">
+  <action name="actionStopCurrentAndContinue">
    <property name="text">
     <string>Arrêter la commande en cours et continuer</string>
    </property>
   </action>
-  <action name="action_x_cuter_les_commandes_suivantes">
+  <action name="actionExecuteNext">
    <property name="text">
-    <string>Exécuter les commandes suivantes</string>
+    <string>Exécuter la suite</string>
    </property>
   </action>
  </widget>

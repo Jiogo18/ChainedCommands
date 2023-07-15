@@ -14,11 +14,14 @@ class CommandListModel : public QAbstractTableModel
     Q_OBJECT
 public:
     explicit CommandListModel(QObject *parent = nullptr);
+    ~CommandListModel();
 
-    void addCommand(Command command);
-    void insertCommand(Command command, int index);
+    void addCommand(Command *command);
+    void insertCommand(Command *command, int index);
     void deleteCommand(int index);
     void deleteCommands(const QItemSelectionModel *select);
+    Command *getCommand(int index);
+    const Command *getCommandConst(int index) const;
     Command *getCommand(const QModelIndex &index);
     const Command *getCommandConst(const QModelIndex &index) const;
     int getNextExecutingCommandIndex() const;
@@ -33,8 +36,11 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
+public slots:
+    void onCommandChanged();
+
 private:
-    QList<Command> commands;
+    QList<Command*> commands;
 };
 
 #endif // COMMANDLISTMODEL_H
