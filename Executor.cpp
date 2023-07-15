@@ -30,10 +30,15 @@ void Executor::start()
     QProcess::setStandardInputFile(nullDevice());
 
     if(openTerminal) {
-        QProcess::start("cmd.exe", QStringList({ "/C", "start /WAIT cmd.exe /C", cmdStr }));
+        // QProcess::start("cmd.exe", QStringList({ "/C", "start /WAIT cmd.exe /C", cmdStr }));
+        QProcess::start("cmd.exe", QStringList({ "/C", cmdStr }));
     }
     else {
-        QProcess::start("cmd.exe", QStringList({ "/C", cmdStr }));
+        QProcess::startCommand(cmdStr);
+        // echo doesn't work with startCommand
+        // timeout never works
+        // sleep works with pwsh.exe
+        // I recommand you to use pwsh/cmd as you want directly in the command
     }
     command->setState(Command::EXECUTING);
 

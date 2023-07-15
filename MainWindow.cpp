@@ -13,11 +13,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listCmds->setColumnWidth(1, 110);
     ui->listCmds->setColumnWidth(2, 367);
 
-    commands.addCommand(new Command("echo a"));
-    commands.addCommand(new Command("echo b"));
-    commands.addCommand(new Command("timeout 5"));
-    commands.addCommand(new Command("echo c"));
-    commands.addCommand(new Command("sleep 3"));
+//    commands.addCommand(new Command("echo a"));
+//    commands.addCommand(new Command("echo b"));
+//    commands.addCommand(new Command("timeout 5"));
+//    commands.addCommand(new Command("echo c"));
+//    commands.addCommand(new Command("sleep 3"));
 
     connect(ui->bCmdAdd, &QPushButton::clicked, this, &MainWindow::onCmdAddClicked);
     connect(ui->bCmdInsert, &QPushButton::clicked, this, &MainWindow::onCmdInsertClicked);

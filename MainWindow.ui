@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>618</width>
-    <height>491</height>
+    <height>471</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Chained Commands</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -76,7 +76,7 @@
            <string>Exécuter les commandes dans un nouveau terminal</string>
           </property>
           <property name="checked">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -101,6 +101,9 @@
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QPushButton" name="bStop">
+        <property name="toolTip">
+         <string>Cliquer 4 fois pour SIGKILL</string>
+        </property>
         <property name="text">
          <string>Arêter tout</string>
         </property>
@@ -108,6 +111,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="bStopAfterCurrent">
+        <property name="toolTip">
+         <string>Cliquer 4 fois pour SIGKILL</string>
+        </property>
         <property name="text">
          <string>Arrêter après la commande en cours</string>
         </property>
@@ -115,6 +121,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="bStopCurrentAndContinue">
+        <property name="toolTip">
+         <string>Cliquer 4 fois pour SIGKILL</string>
+        </property>
         <property name="text">
          <string>Arrêter la commande en cours et continuer</string>
         </property>
