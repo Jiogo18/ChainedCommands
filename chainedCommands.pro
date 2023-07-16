@@ -17,3 +17,6 @@ SOURCES += \
     Executor.cpp \
     MainWindow.cpp \
     main.cpp
+
+RESOURCES += \
+    README.md
